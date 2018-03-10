@@ -1,0 +1,30 @@
+#include <stdio.h>
+int day_of_year(int, int, int, int (*)[13]);
+
+static int daytab[2][13] = {
+  {0,31,28,31,30,31,30,31,31,30,31,30,31},
+  {0,31,29,31,30,31,30,31,31,30,31,30,31}
+};
+
+main()
+{
+  int year = 1986, month = 6, day = 6;
+  printf("%d\n", day_of_year(year, month, day, daytab));
+
+}
+
+
+int day_of_year (int year, int month, int day, int (*daytab)[13])
+{
+  int i, leap;
+
+  leap = year%4 == 0 && year%100 != 0 || year%400 == 0;
+
+  if (leap == 1)
+    daytab++;
+
+  for (i = 1; i < month; i++)
+    day += *++daytab;
+  
+  return day;
+}
