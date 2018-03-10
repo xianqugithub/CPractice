@@ -1,0 +1,15 @@
+#include<stdio.h>
+
+unsigned setbits(unsigned, int, int, unsigned);
+unsigned invert(unsigned, int, int);
+unsigned rightrot(int, int);
+
+unsigned setbits(unsigned x, unsigned p, unsigned n, unsigned y)
+{
+  //right most of x to be perserved
+  unsigned r = x & ~( ~ 0 << (p-n+1));
+  //right most of y to be added
+  unsigned a = y & ~ (~ 0 << n);
+
+  return ((((x >> (p+1)) << n) + a) << (p-n+1)) + r;
+}

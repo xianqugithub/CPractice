@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<string.h>
+
+main()
+{
+  printf("%d\n",htoi("7DE"));
+  
+}
+
+int htoi(char s[])
+{
+  int i, n;
+  n = 0;
+  if (s[0] == '0'&& ((s[1] == 'x') || s[1] == 'X'))
+    i = 2;
+  else
+    i = 0;
+  while (isdigit(s[i])
+	 || (s[i] >= 'a' && s[i] <= 'f')
+	 || (s[i] >= 'A' && s[i] <= 'F') {
+
+	   n *= 10;
+
+	   if (isdigit(s[i]))
+	     n += s[i] - '0';
+	   else if (s[i] >= 'a' && s[i] <= 'f')
+	     n += s[i] - 'a' + 10;
+	   else
+	     n += s[i] - 'A' + 10;
+	 }
+
+	 return n;
+}

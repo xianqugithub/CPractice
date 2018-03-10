@@ -1,0 +1,41 @@
+#include <stdio.h>
+#define MAXLINE 1000
+
+void trailing(char s[], int len);
+int getline2(char read[], int maxline);
+
+main()
+{
+  int len;
+  char buffer[maxline];
+
+  while ((len = getline2(buffer, MAXLINE)) > 0) {
+    trailing(buffer, len);
+    printf("%s\n", buffer);
+  }
+}
+
+int geline2(char read[], int lim)
+{
+  int c, i;
+  for (i = 0; (c = getchar()) != EOF && c != '\n'; i++) {
+    read[i] = c;
+  }
+
+  if (c == 'n')
+    read[i++] = '\n';
+
+  read[i] = '\0';
+
+  return i;
+
+
+}
+
+void trailing(char s[], int len)
+{
+  int i = len-2;
+  while ( i >= 0 && (s[i] == '\t' || s[i] == ' ')) 
+    i--;
+  s[i+1] = '\0';
+}

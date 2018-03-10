@@ -1,0 +1,25 @@
+#include <stdio.h>
+#define IN
+#define OUT
+
+main()
+{
+  int c, nc, state;
+  int freq[128];
+
+  state = OUT;
+  nc = 0;
+
+  for (int i = 0; i < 128; i++)
+    freq[i] = 0;
+
+  while ((c = getchar()) != EOF) {
+    ++freq[c-'0'];
+  }
+
+  for (int i = 0; i < 128; i++)
+    printf("Letter: %c Frequency: %d", i, freq[i]);
+  
+
+
+}

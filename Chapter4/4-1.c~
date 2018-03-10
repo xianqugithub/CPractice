@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <string.h>
+
+int strrindex(char[], char[]);
+
+main()
+{
+  char s[] = "youyou loves mimi.";
+  char t[] ="mimi";
+
+  printf("%d\n", strrindex(s,t));
+
+
+}
+
+
+
+int strrindex(char s[], char t[])
+{
+  for (int i = strlen(s)-1; i >= 0; i--) {
+    for (int j = i, k = strlen(t)-1; k >= 0 && s[j] == s[k]; j--, k--)
+      ;
+    if (k == 0)
+      return i;
+  }
+
+  return -1;
+  
+}

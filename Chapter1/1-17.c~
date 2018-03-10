@@ -1,0 +1,29 @@
+#include <stdio.h>
+#define MAXLINE = 1000
+#define MINLENGTH = 80
+
+
+int getlinev2(char buffer[], int maxline);
+
+main()
+{
+  int c, line;
+  char buffer[];
+  while ((line = getlinev2(buffer, MAXLINE) > 0) {
+      if (line > MINLENGTH)
+	printf("%s", buffer);
+    }
+}
+
+int getlinev2(char buffer[], int maxline) {
+  int i,c;
+  for (i = 0; (c = getchar()) != EOF && c != '\n'; i++) {
+    buffer[i] = c;
+  }
+
+  if (c == '\n')
+    buffer[i++] = '\n';
+
+  buffer[i] = '\0';
+
+}

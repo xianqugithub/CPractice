@@ -1,0 +1,18 @@
+#include <stdio.h>
+#define IN 1
+#define OUT 0
+
+main()
+{
+  int c, state;
+  while ((c = getchar()) != EOF) {
+    state = IN;
+    if (c == ' ' || c == '\n' || c == '\t')
+      state = OUT;
+    else if (state == IN)
+      putchar(c);
+  }
+
+
+
+}
