@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int strncmp(char *, char *, int);
+
+main()
+{
+  char s[] = "youyou";
+  char t[] = "youbao";
+  printf("%d\n", strncmp(s,t,1));
+  printf("%d\n", strncmp(s,t,2));
+  printf("%d\n", strncmp(s,t,3));
+  printf("%d\n", strncmp(s,t,4));
+  printf("%d\n", strncmp(s,t,5));
+  printf("%d\n", strncmp(s,t,6));
+  printf("%d\n", strncmp(s,t,7));
+  
+}
+
+
+int strncmp(char *s, char *t, int n)
+{
+  int i;
+
+  for (i = 0; i < n && *s == *t; i++, s++, t++)
+    if (*s == '\0')
+      return 0;
+
+  if (i == n)
+    return 0;
+
+  return *s - *t;
+
+}
