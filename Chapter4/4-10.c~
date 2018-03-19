@@ -1,0 +1,15 @@
+int getline(char *, int);
+
+
+
+
+int getline(char *s, int lim)
+{
+  int i = 0, c;
+  while (--lim > 0 && (c = getchar()) != EOF && c != '\n') {
+    *s++ = c;
+    i++;
+  }
+  *s = '\0';
+  return i;
+}
