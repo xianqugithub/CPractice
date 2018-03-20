@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAXLEN 1000
+#define MAXLINES 5000
+#define ALLOCSIZE 50000
+#define DEAFULTLINENO 10
+
+char *lineptr[MAXLINES];
+
+static char allocbuf[ALLOCSIZE];
+static char *allocp = allocbuf;
+
+int gline(char *line, int lim)
+int readlines(char *lineptr[], int maxlines);
+void writelines(char *lineptr[], int nlines);
+char *alloc(int n);
+
+main(int argc, char *argv[])
+{
+  int c, number, nlines;
+
+  if (argc != 3 && argc != 1) {
+    printf("Wrong arguments.\n");
+    return 0;
+  }
+
+  if (argc == 1)
+    number = DEAFULTLINENO;
+  else {
+    while (--argc > 0 && (*++argv)[0] == '-') {
+      if (*++argv[0] == 'n') {
+	number = atoi(*++argv);
+      } else {
+	printf ("Illegal Operation.\n");
+	return 0;
+      }
+    }
+  }
+
+  if ((nlines = readlines(lineptr, MAXLINES)) > 0) {
+    nlines = nlines < number ? nlines:number;
+    writelines(lineptr, nlines);    
+  } else {
+    printf("Input Error.\n");
+    return 0;
+  }
+}
+
+
+char *alloc(int n)
+{
+  if (allocbuf + ALLOCSIZE - allocp >= n) {
+    allocp += n;
+    return allocp - n;
+  } else
+    return 0;
+}
+
+int gline(char *line, int lim)
+{
+  int i = 0, c;
+  while ((c = getchar()) != EOF && c != '\n' &&  i < lim - 1) {
+    line[i++] = c;
+  } 
+  line[i] = '/0';
+  return i;
+}
+
+int readlines(char *lineptr[], int maxline)
+{
+  int len, nlines;
+  char *p, line[MAXLEN];
+
+  nline = 0;
+  while ((len = gline(line, MAXLEN)) > 0) {
+    if ((nlines > MAXLINES) || (p = alloc(len)) == NULL) {
+      printf("error: exceeding storage limit.\n");
+    } else {
+      strcpy(p, line);
+      lineptr[nlines++] = p;
+    }
+  }
+  return nline;
+}
+
+void writelines(char *lineptr[], int nlines, int counter)
+{
+  while (nlines > 0) {
+    printf("%s\n", *lineptr[nlines--]);
+  }
+}
