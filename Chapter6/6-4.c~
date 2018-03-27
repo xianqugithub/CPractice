@@ -1,0 +1,118 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAXWORDS 100;
+#define WORDMAX 100;
+
+
+struct tnode
+{
+  char *word;
+  int count;
+  tnode *left;
+  tnode *right;
+};
+
+int size = 0; /* global variable for size of the tlist array*/
+
+char wordbuf[WORDMAX+1];
+struct tnode *tlist[MAXWORDS];
+
+
+
+
+/* IO of the input */
+int getword(char *, int);
+int getch(void);
+void ungetch(int);
+
+/* tree related */
+struct tnode *addtree(struct tnode *, char *);
+void traverse(struct tnode *);
+
+/* shell sort */
+void shellsort(struct tnode *[], int);
+
+main()
+{
+ 
+  struct tnode *root;
+
+  root = NULL;
+  
+  while (getword(wordbuf, WORDMAX) != EOF) {
+    root = addtree(root, wordbuf);
+  }
+
+  traverse(root);
+  shellsort(tlist, size);
+
+  for (int i = 0; i < size; i++) {
+    printf("%s:%d\n", tlist[i]->word, tlist[i]->count);
+  }
+
+  return 0;
+}
+
+int getword(char *buf, int lim)
+{
+
+int c;
+while (c = getch())
+
+
+  
+
+
+}
+
+
+
+struct tnode *addtree(struct tnode *root, char *w)
+{
+  int cond;
+  
+  if (root == NULL) {
+    root = (struct tnode *) malloc (sizeof(struct tnode));
+    root->word = strdup(w);
+    root->count = 1;
+    root->left = root->right == NULL;
+  } else if ((cond = strcmp(w, root->word)) == 0)
+    root->count++;
+  else if (cond > 0)
+    root->right = addtree(root->right, w);
+  else
+    root->left = addtree(root->left, w);
+
+  return root;
+}
+
+void traverse(struct tnode *root)
+{
+  if (root != NULL) {
+    traverse(root->left);
+    tlist[size++] = root;
+    traverse(root->right);
+  }
+}
+
+void shellsort(struct tnode *tlist[], int n)
+{
+  int gap, i, j;
+  struct tnode *temp;
+
+  for (gap = n/2; gap > 0; gap/=2)
+    for (i = gap; i < n; i++)
+      for (j = i-gap; j >=0 && tlist[j]->count > tlist[i]->count; j- = gap) {
+	temp = tlist[i];
+	tlist[i] = tlist[j];
+	tlist[j] = temp;
+      }
+}
+
+
+
+
+
+  
