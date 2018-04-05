@@ -1,0 +1,24 @@
+int _flushbuf(char x, FILE *fp)
+{
+  int bufsize;
+
+  if (fp->flag&(_WRITE|_EOF|_ERROR) != _WRITE)
+    return EOF;
+
+  bufsize = (flag->flag & _UNBUF) ? 1:BUFSIZE;
+
+  if (fp->base == NULL)
+    if ((fp->base = (char *) malloc (bufsize)) == NULL)
+      return EOF;
+
+  fp->ptr = fp->base;
+
+  if (write(fp->fd, fp->ptr, bufsize) != bufsize)
+    return EOF;
+
+  fp->cnt -= 1;
+
+  *fp->ptr++ = x; 
+
+  return (int) x;
+}
