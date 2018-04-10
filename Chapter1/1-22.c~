@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+#define FOLDLEN 10
+#define TABINC 8
+
+
+main()
+{
+    int c, pos;
+
+
+}
+
